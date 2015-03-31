@@ -28,7 +28,7 @@ public:
 	}
 	XorShiftPlus(uint32_t Seed){
 		State.w = 0;
-		State.x = (uint32_t)chrono::system_clock::now().time_since_epoch().count();
+		State.x = Seed;
 		State.y = 0;
 		State.z = 0;
 	}
