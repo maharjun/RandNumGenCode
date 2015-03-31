@@ -68,42 +68,25 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray *prhs[]){
 	// NOTE THAT THERE IS NO DATA VALIDATION AS THIS IS EXPECTED TO HAVE 
 	// BEEN DONE IN THE MATLAB SIDE OF THE INTERFACE TO THIS MEX FUNCTION
 
-	// Test 1: 
-	// 1. Generate a series of random numbers with some seed.
-	// 2. Now Store the state.
-	// 3. Generate a series of random numbers further. call this Set1
-	// 4. reset the seed and generate above set again. call this Set2.
-	// 5. Pass to matlab and verify the equality.
+	// Test 2: 
+	// 1. Generate a series of random numbers 10000 in each time for 1000 time steps 
+	//    with some seed.
+	// 2. Pass to matlab and verify that Kurtosis is zero and AR coefficients are accurately determined.
 
 	int N = 10000;	// Number of elements in the vector for each time instant.
-	uint32_t InitSeed = 0x183bef10;
+	uint32_t InitSeed = 0x183bcf10;
 
-	// initialinzing Generators
+	// initializing Generators
 	XorShiftPlus G1(InitSeed), G2(InitSeed ^ (InitSeed >> 5));
 	BandLimGaussVect RandVect(N, G1, G2, 0.4);
-	MexMatrix<float> Set1(100, N), Set2(100,N);
-
-	for (int i = 0; i < 100; ++i){
-		RandVect.generate();
-	}
-	// Saving generators
-	BandLimGaussVect::StateStruct IntermediateState;
-	RandVect.getstate(IntermediateState);
-	// generating 100 sets of rnos
-	for (int i = 0; i < 100; ++i){
+	MexMatrix<float> Set1(1000, N);
+	
+	// generating 1000 sets of rnos
+	for (int i = 0; i < 1000; ++i){
 		RandVect.generate();
 		Set1[i] = RandVect;
-	}
-	
-	// resetting State
-	RandVect.setstate(IntermediateState);
-	// generating 100 sets of rnos
-	for (int i = 0; i < 100; ++i){
-		RandVect.generate();
-		Set2[i] = RandVect;
 	}
 
 	// returning these matrices to matlab.
 	plhs[0] = assignmxArray(Set1, mxSINGLE_CLASS);
-	plhs[1] = assignmxArray(Set2, mxSINGLE_CLASS);
 }

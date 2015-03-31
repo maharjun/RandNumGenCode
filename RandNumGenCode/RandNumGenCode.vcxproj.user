@@ -2,13 +2,13 @@
 <Project ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LocalDebuggerCommand>C:\Program Files\MATLAB\R2013a\bin\win64\MATLAB.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>-nodisplay -nosplash -nodesktop -r "Build='Release'; run('$(ProjectDir)MatlabSource\RnoConsistencyTest.m');"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-nodisplay -nosplash -nodesktop -r "Build='Release'; run('$(ProjectDir)MatlabSource\RnoDistandSpectTest.m');"</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)MatlabSource</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LocalDebuggerCommand>C:\Program Files\MATLAB\R2013a\bin\win64\MATLAB.exe</LocalDebuggerCommand>
-    <LocalDebuggerCommandArguments>-nodisplay -nosplash -nodesktop -r "Build='Debug'; run('$(ProjectDir)MatlabSource\RnoConsistencyTest.m');"</LocalDebuggerCommandArguments>
+    <LocalDebuggerCommandArguments>-nodisplay -nosplash -nodesktop -r "Build='Debug'; run('$(ProjectDir)MatlabSource\RnoDistandSpectTest.m');"</LocalDebuggerCommandArguments>
     <LocalDebuggerWorkingDirectory>$(ProjectDir)MatlabSource</LocalDebuggerWorkingDirectory>
     <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
   </PropertyGroup>
