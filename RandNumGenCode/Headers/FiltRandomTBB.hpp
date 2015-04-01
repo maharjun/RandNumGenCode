@@ -170,7 +170,7 @@ public:
 	}
 };
 
-class FiltRandomTBB : public mt19937{
+class mt19937Extended : public mt19937{
 public:
 	void getState(MexVector<unsigned int> &V){
 		V.resize(624);
@@ -187,10 +187,11 @@ public:
 		this->seed(Seed);
 	}
 };
-
-void Coolshit(){
-	FiltRandomTBB YEAHHNN;
-	normal_distribution<> Yo;
-	Yo(YEAHHNN);
-	YEAHHNN();
-}
+// // Random Code mainly to open libraries
+// // Completely useless otherwise
+// void Coolshit(){
+	// FiltRandomTBB YEAHHNN;
+	// normal_distribution<> Yo;
+	// Yo(YEAHHNN);
+	// YEAHHNN();
+// }
