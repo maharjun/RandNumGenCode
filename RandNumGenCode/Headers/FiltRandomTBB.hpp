@@ -156,34 +156,17 @@ public:
 		iterator Array_Last = this->end();
 		iterator i, j;
 		
-		tbb::task_group RNoGenTasks;
-		RNoGenTasks.run([&]{
-			float alpha = this->alpha;
-			pair<resTyp, resTyp> gaussRandValues;
-			for (i = Array_Beg + 1; i < Array_Mid; i += 2){
-				gaussRandValues = gaussRandVal(Generator1);
-				*(i - 1) = *(i-1) * alpha + (1 - alpha) * gaussRandValues.first;
-				*i = *i * alpha + (1 - alpha) * gaussRandValues.second;
-			}
-			if (i == Array_Mid){
-				gaussRandValues = gaussRandVal(Generator1);
-				*(i - 1) = *(i - 1) * alpha + (1 - alpha) * gaussRandValues.first;
-			}
-		}); // spawn task of filling lower half of array
-		RNoGenTasks.run([&]{
-			float alpha = this->alpha;
-			pair<resTyp, resTyp> gaussRandValues;
-			for (j = Array_Mid + 1; j < Array_Last; j += 2){
-				gaussRandValues = gaussRandVal(Generator2);
-				*(j - 1) = *(j - 1) * alpha + (1 - alpha) * gaussRandValues.first;
-				*j = *j * alpha + (1 - alpha) * gaussRandValues.second;
-			}
-			if (j == Array_Last){
-				gaussRandValues = gaussRandVal(Generator2);
-				*(j - 1) = *(j - 1) * alpha + (1 - alpha) * gaussRandValues.first;
-			}
-		}); // spawn task of filling upper half of array
-		RNoGenTasks.wait();                // wait for both tasks to complete
+		float &alpha = this->alpha;
+		pair<resTyp, resTyp> gaussRandValues;
+		for (i = Array_Beg + 1; i < Array_Last; i += 2){
+			gaussRandValues = gaussRandVal(Generator1);
+			*(i - 1) = *(i-1) * alpha + (1 - alpha) * gaussRandValues.first;
+			*i = *i * alpha + (1 - alpha) * gaussRandValues.second;
+		}
+		if (i == Array_Last){
+			gaussRandValues = gaussRandVal(Generator1);
+			*(i - 1) = *(i - 1) * alpha + (1 - alpha) * gaussRandValues.first;
+		}
 	}
 };
 
