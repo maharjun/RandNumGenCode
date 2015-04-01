@@ -82,11 +82,10 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, mxArray *prhs[]){
 	MexMatrix<float> Set1(1000, N);
 	
 	// generating 1000 sets of rnos
-	for (int i = 0; i < 1000; ++i){
+	for (int i = 0; i < 50000; ++i){
 		RandVect.generate();
-		Set1[i] = RandVect;
 	}
 
 	// returning these matrices to matlab.
-	plhs[0] = assignmxArray(Set1, mxSINGLE_CLASS);
+	// plhs[0] = assignmxArray(Set1, mxSINGLE_CLASS);
 }
